@@ -1,4 +1,4 @@
-package com.vu.networkexample.homescreen
+package com.vu.networkexample.homescreen.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

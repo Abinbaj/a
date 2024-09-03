@@ -1,4 +1,4 @@
-package com.vu.networkexample.homescreen
+package com.vu.networkexample.homescreen.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
