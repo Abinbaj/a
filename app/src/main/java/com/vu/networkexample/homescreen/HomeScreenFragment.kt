@@ -1,10 +1,11 @@
-package com.vu.networkexample
+package com.vu.networkexample.homescreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.vu.networkexample.R
 
 class HomeScreenFragment : Fragment() {
 
