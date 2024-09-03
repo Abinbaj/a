@@ -7,6 +7,7 @@
     tools:context=".homescreen.HomeScreenFragment">
 
     <TextView
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home_screen_greeting_text"

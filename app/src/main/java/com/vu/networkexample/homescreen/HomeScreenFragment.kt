@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.vu.networkexample.R
+import kotlinx.coroutines.launch
 
 class HomeScreenFragment : Fragment() {
 
@@ -18,5 +21,15 @@ class HomeScreenFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home_screen, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+                viewModel.text.collect { newText ->
+                    view.findViewById<TextView>(R.id.text).text = newText
+            }
+        }
     }
 }
