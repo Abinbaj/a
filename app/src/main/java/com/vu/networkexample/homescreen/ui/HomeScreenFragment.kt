@@ -30,8 +30,8 @@ class HomeScreenFragment : Fragment() {
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.text.collect { newText ->
-                    view.findViewById<TextView>(R.id.text).text = newText
+                viewModel.objectsState.collect { itemsInApiResponse ->
+                    view.findViewById<TextView>(R.id.text).text = itemsInApiResponse.toString()
                 }
             }
         }
