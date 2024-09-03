@@ -7,14 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.vu.networkexample.R
 import kotlinx.coroutines.launch
 
 class HomeScreenFragment : Fragment() {
 
     private val viewModel: HomeScreenViewModel by viewModels()
-    
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,8 +29,10 @@ class HomeScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.text.collect { newText ->
                     view.findViewById<TextView>(R.id.text).text = newText
+                }
             }
         }
     }
