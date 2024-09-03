@@ -2,6 +2,8 @@ package com.vu.networkexample.homescreen.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vu.networkexample.homescreen.data.ResponseItem
+import com.vu.networkexample.homescreen.data.RestfulDevApiRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -9,18 +11,22 @@ import kotlinx.coroutines.launch
 
 class HomeScreenViewModel: ViewModel() {
 
-    private val _text = MutableStateFlow("Initial Text")
-    val text: StateFlow<String> = _text
+    private val repository = RestfulDevApiRepository()
 
-    init {
-        updateTextAfterDelay()
-    }
+    private val mutableObjectsState = MutableStateFlow<List<ResponseItem>>(emptyList())
+    val objectsState: StateFlow<List<ResponseItem>> = mutableObjectsState
 
-    private fun updateTextAfterDelay() {
+    private val _errorState = MutableStateFlow<String?>(null)
+    val errorState: StateFlow<String?> = _errorState
 
+    fun getAllObjects() {
         viewModelScope.launch {
-            delay(2000) // 2 second delay
-            _text.value = "Text updated after delay!"
+            try {
+                val objects = repository.getAllObjects()
+                mutableObjectsState.value = objects
+            } catch (e: Exception) {
+                _errorState.value = "Error fetching objects: ${e.message}"
+            }
         }
     }
 }
