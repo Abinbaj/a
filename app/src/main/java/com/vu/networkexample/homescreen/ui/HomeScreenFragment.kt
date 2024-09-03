@@ -34,7 +34,11 @@ class HomeScreenFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.objectsState.collect { itemsInApiResponse ->
                     if (itemsInApiResponse.isNotEmpty()) {
-                        view.findViewById<TextView>(R.id.text).text = itemsInApiResponse.toString()
+                        var textValue = ""
+                        itemsInApiResponse.map { item ->
+                            textValue = textValue + item + "\n\n"
+                        }
+                        view.findViewById<TextView>(R.id.text).text = textValue
                     }
                 }
             }
