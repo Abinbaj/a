@@ -49,4 +49,8 @@ dependencies {
     // Views/Fragments navigation integration
     implementation("androidx.navigation:navigation-fragment:2.7.7")
     implementation("androidx.navigation:navigation-ui:2.7.7")
+
+    // Retrofit dependencies
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
 }
