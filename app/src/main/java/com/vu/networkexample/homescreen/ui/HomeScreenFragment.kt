@@ -28,10 +28,14 @@ class HomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getAllObjects()
+
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.objectsState.collect { itemsInApiResponse ->
-                    view.findViewById<TextView>(R.id.text).text = itemsInApiResponse.toString()
+                    if (itemsInApiResponse.isNotEmpty()) {
+                        view.findViewById<TextView>(R.id.text).text = itemsInApiResponse.toString()
+                    }
                 }
             }
         }
